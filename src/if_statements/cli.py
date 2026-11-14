@@ -9,7 +9,7 @@ from typing import TextIO
 
 from if_statements import __version__
 from if_statements.lessons import LESSONS, Lesson
-from if_statements.quiz import QUESTIONS, Question, is_correct
+from if_statements.quiz import QUESTIONS, is_correct
 
 Input = Callable[[str], str]
 
