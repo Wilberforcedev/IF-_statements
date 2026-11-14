@@ -4,9 +4,6 @@ A small, interactive command-line course for learning Python conditional logic. 
 includes five short lessons, runnable code examples, and a multiple-choice review
 quiz with explanations. The app uses only the Python standard library.
 
-> This project turns the repository's original topic, “If statements in JAVA,” into
-> a Python learning resource, as requested.
-
 ## Requirements
 
 - Python 3.10 or newer
