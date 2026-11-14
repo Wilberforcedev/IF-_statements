@@ -56,7 +56,13 @@ def _run_quiz(input_fn: Input, output: TextIO) -> None:
             print(f"   {index}. {choice}", file=output)
 
         valid = {str(index) for index in range(1, len(question.choices) + 1)}
-        selection = _read_menu_choice("Your answer: ", valid, input_fn, output)
+        valid.add("q")
+        selection = _read_menu_choice(
+            "Your answer (or q to return to the menu): ",
+            valid,
+            input_fn,
+            output,
+        )
         if selection == "q":
             return
 
@@ -71,7 +77,7 @@ def _run_quiz(input_fn: Input, output: TextIO) -> None:
     print(f"\nYour score: {score}/{len(QUESTIONS)}", file=output)
     if score == len(QUESTIONS):
         print("Excellent work. You have mastered these basics.", file=output)
-    elif score >= len(QUESTIONS) // 2:
+    elif score >= (len(QUESTIONS) + 1) // 2:
         print("Good progress. Review any topics that felt uncertain.", file=output)
     else:
         print("Review the lessons, then try the quiz again.", file=output)
@@ -92,9 +98,8 @@ def run(
         print("  1-5. Open a lesson", file=output)
         print("  q.   Quit", file=output)
         print("  quiz. Take the review quiz", file=output)
-        print("  h.   Show this menu again", file=output)
         valid = {str(index) for index in range(1, len(LESSONS) + 1)}
-        valid.update({"q", "quiz", "h"})
+        valid.update({"q", "quiz"})
         choice = _read_menu_choice("Choose an option: ", valid, input_fn, output)
 
         if choice == "q":
@@ -102,8 +107,6 @@ def run(
             return 0
         if choice == "quiz":
             _run_quiz(input_fn, output)
-            continue
-        if choice == "h":
             continue
         _show_lesson(LESSONS[int(choice) - 1], output)
 
